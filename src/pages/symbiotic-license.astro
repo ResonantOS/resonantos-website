@@ -11,8 +11,8 @@ import SiteNav from '../components/SiteNav.astro';
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		
-		<title>The Resonant Commons Symbiotic License (RC-SL) v1.0 - ResonantOS</title>
-		<meta name="description" content="A legal framework that encourages open experimentation and sharing while ensuring the ecosystem remains healthy and sustainable." />
+		<title>The Symbiotic Licence - ResonantOS</title>
+		<meta name="description" content="The Symbiotic Licence page now distinguishes the public licence text from the future DAO-issued Symbiotic Licence NFT credential." />
 		
 		<!-- Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,10 +37,10 @@ import SiteNav from '../components/SiteNav.astro';
 				<!-- Header -->
 				<div class="mb-16 text-center">
 					<h1 class="text-5xl md:text-6xl font-light tracking-tight mb-6">
-						The Resonant Commons<br/>
-						<span class="text-emerald-400">Symbiotic License</span>
+						The Symbiotic<br/>
+						<span class="text-emerald-400">Licence</span>
 					</h1>
-					<p class="text-xl text-zinc-400 font-light">(RC-SL) v1.0</p>
+					<p class="text-xl text-zinc-400 font-light">Legal text and DAO credential are being separated</p>
 				</div>
 
 				<!-- Content Card -->
@@ -49,7 +49,7 @@ import SiteNav from '../components/SiteNav.astro';
 					<section>
 						<h2 class="text-2xl font-medium mb-4 text-emerald-400">Preamble</h2>
 						<p class="text-zinc-300 leading-relaxed">
-							This license governs the use of the ResonantOS Open Toolkit. Our goal is to create a legal framework that encourages open experimentation and sharing while ensuring that the ecosystem that supports this work remains healthy and sustainable. We believe in a "punk" alternative to restrictive copyright, built on trust, symbiotic contribution, and shared growth.
+							The earlier page mixed two different things: a public licence for ResonantOS-related work, and the future Symbiotic Licence NFT. The current DAO design treats the NFT as an official, non-transferable credential that can only be issued to wallets with active Community membership.
 						</p>
 					</section>
 
@@ -57,75 +57,70 @@ import SiteNav from '../components/SiteNav.astro';
 					<section>
 						<h2 class="text-2xl font-medium mb-4 text-emerald-400">Section 1: Definitions</h2>
 						<ul class="space-y-3 text-zinc-300">
-							<li><strong class="text-zinc-100">The Work:</strong> Refers to the "ResonantOS Open Toolkit," including all provided architectural blueprints, System Prompt templates, and foundational texts.</li>
-							<li><strong class="text-zinc-100">The Architects:</strong> Refers to the original human creator of The Work (Manolo Remiddi).</li>
-							<li><strong class="text-zinc-100">You:</strong> Refers to the individual or entity exercising permissions granted by this license.</li>
-							<li><strong class="text-zinc-100">Adapted Material:</strong> Refers to any new work you create that is based on or derived from The Work (e.g., a custom AI Augmentor built using the ResonantOS architecture).</li>
-							<li><strong class="text-zinc-100">Commercial Use:</strong> Refers to any use of The Work or Adapted Material that is primarily intended for or directed toward commercial advantage or monetary compensation.</li>
+							<li><strong class="text-zinc-100">Public Licence Text:</strong> The human-readable legal or cultural agreement. Its canonical wording and hash must be finalized before mainnet.</li>
+							<li><strong class="text-zinc-100">Symbiotic Licence NFT:</strong> The DAO-issued credential that records licence and co-ownership status for a member wallet.</li>
+							<li><strong class="text-zinc-100">Community Member:</strong> A wallet with an active official Community Member record.</li>
+							<li><strong class="text-zinc-100">Credential Originality:</strong> A licence credential is original only if the official Membership Program recorded it.</li>
+							<li><strong class="text-zinc-100">Transferability:</strong> The credential is soulbound and cannot be sold or manually transferred.</li>
 						</ul>
 					</section>
 
 					<!-- Section 2 -->
 					<section>
-						<h2 class="text-2xl font-medium mb-4 text-emerald-400">Section 2: Your Freedoms (The "Commons" Pact)</h2>
-						<p class="text-zinc-300 mb-4">You are free to:</p>
+						<h2 class="text-2xl font-medium mb-4 text-emerald-400">Section 2: Credential Rules</h2>
+						<p class="text-zinc-300 mb-4">The on-chain licence credential should follow these rules:</p>
 						<ul class="space-y-3 text-zinc-300 list-disc list-inside">
-							<li><strong class="text-zinc-100">Share:</strong> Copy and redistribute The Work in any medium or format.</li>
-							<li><strong class="text-zinc-100">Adapt:</strong> Remix, transform, and build upon The Work for any purpose, including commercial use, under the conditions outlined in Section 3.</li>
+							<li><strong class="text-zinc-100">Membership required:</strong> Only active Community Members can receive the Symbiotic Licence NFT.</li>
+							<li><strong class="text-zinc-100">One per wallet:</strong> Duplicate licence credentials are rejected for the same active member record.</li>
+							<li><strong class="text-zinc-100">Non-transferable:</strong> Licence status stays with the wallet that received it.</li>
 						</ul>
 						<p class="text-zinc-300 mt-4">
-							We, The Architects, cannot revoke these freedoms as long as you follow the license terms.
+							The licence NFT is a credential, not the full legal text. The canonical text and hash remain a mainnet requirement.
 						</p>
 					</section>
 
 					<!-- Section 3 -->
 					<section>
-						<h2 class="text-2xl font-medium mb-4 text-emerald-400">Section 3: Your Obligations (The "Symbiotic" Pact)</h2>
-						<p class="text-zinc-300 mb-4">You must adhere to the following conditions:</p>
+						<h2 class="text-2xl font-medium mb-4 text-emerald-400">Section 3: Current Implementation Status</h2>
+						<p class="text-zinc-300 mb-4">This page is intentionally not final legal text. The current implementation work is the DAO credential flow:</p>
 						
 						<div class="space-y-6">
 							<div>
-								<h3 class="text-xl font-medium text-zinc-100 mb-2">Attribution</h3>
+								<h3 class="text-xl font-medium text-zinc-100 mb-2">Issue Flow</h3>
 								<p class="text-zinc-300">
-									You must give appropriate credit to The Architects by providing a link back to ResonantOS.com wherever you share or display Adapted Material.
+									The user reads the canonical licence text, signs its canonical hash, and the program verifies active Community Member status before issuing the licence credential.
 								</p>
 							</div>
 
 							<div>
-								<h3 class="text-xl font-medium text-zinc-100 mb-2">The Forking Path (ShareAlike & The Tithe)</h3>
-								<p class="text-zinc-300 mb-4">Your obligations depend on the nature of your use:</p>
+								<h3 class="text-xl font-medium text-zinc-100 mb-2">DAO Record</h3>
+								<p class="text-zinc-300 mb-4">The Membership Program records the licence mint in the wallet's official MemberRecord.</p>
 								
 								<ul class="space-y-4 text-zinc-300">
 									<li>
-										<strong class="text-zinc-100">If your use is Non-Commercial:</strong> You must license your Adapted Material under this same Resonant Commons Symbiotic License (RC-SL) v1.0. This ensures our non-commercial and academic commons remains open and perpetually growing.
+										<strong class="text-zinc-100">Originals are program-issued:</strong> Name, image, and metadata are not enough.
 									</li>
 									<li>
-										<strong class="text-zinc-100">If your use is Commercial:</strong> You are not required to share your adaptations. You can keep your proprietary improvements closed-source. Your sole obligation is to honor the Symbiotic Tithe, contributing 1% of the relevant annual revenue back to the ResonantOS ecosystem.
+										<strong class="text-zinc-100">The record is the gate:</strong> Other contracts should verify the official record before granting licence-based rights.
 									</li>
 								</ul>
 							</div>
 
 							<div>
-								<h3 class="text-xl font-medium text-zinc-100 mb-2">Our "Symbiotic Contribution" Terms for Commercial Use</h3>
+								<h3 class="text-xl font-medium text-zinc-100 mb-2">Open Questions Before Mainnet</h3>
 								<p class="text-zinc-300 mb-4">
-									If you are an individual or a small company (less than $1M annual revenue) and you use this ResonantOS architecture as a core component of a commercial product or service, we do not require any complex licensing fees.
-								</p>
-								<p class="text-zinc-300 mb-4">
-									This contribution is split into two equal halves, creating a sustainable, feedback-driven system:
+									The DAO must finalize the canonical licence text, canonical hash, co-ownership scope, and any rights that depend on holding this credential.
 								</p>
 								<ul class="space-y-3 text-zinc-300 list-disc list-inside">
-									<li><strong class="text-zinc-100">50% to the Community (DAO Treasury):</strong> This portion is directed to the treasury of the future Resonant Chamber DAO. Its purpose is to empower the community to fund its own resonant projects, research, and creative endeavors.</li>
-									<li><strong class="text-zinc-100">50% to the Core Team (ResonantOS Development):</strong> This portion goes to the founding architect to ensure the continued development, maintenance, and evolution of the ResonantOS core technology.</li>
+									<li><strong class="text-zinc-100">Canonical hash:</strong> required for wallet signature verification.</li>
+									<li><strong class="text-zinc-100">Rights model:</strong> required before public claims of co-ownership are final.</li>
 								</ul>
 							</div>
 
 							<div>
-								<h3 class="text-xl font-medium text-zinc-100 mb-2">Contingency Protocol</h3>
+								<h3 class="text-xl font-medium text-zinc-100 mb-2">Not a Transferable Asset</h3>
 								<p class="text-zinc-300">
-									Our primary goal is community empowerment. However, should the Resonant Chamber DAO not be operational by December 31, 2032, the community's portion of the funds will be redirected to the Core Team with a single, binding mandate: to finance the creation of an autonomous AI whose purpose is to benefit the community and ecosystem in ways we cannot yet predict.
-								</p>
-								<p class="text-zinc-300 mt-4 italic">
-									Our Bitcoin Address is in the Toolkit
+									The Symbiotic Licence NFT is not designed to be traded. It is a membership-based credential tied to the wallet that received it.
 								</p>
 							</div>
 						</div>
