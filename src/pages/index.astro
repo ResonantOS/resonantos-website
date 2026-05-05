@@ -207,74 +207,13 @@ import SiteNav from '../components/SiteNav.astro';
 					<p class="text-lg text-zinc-300 mb-4">
 						<strong class="text-zinc-100">Think of it as:</strong> a command center where agents, tools, add-ons, project memory, approvals, and community-shared workflows belong to one coherent app experience.
 					</p>
-					<p class="text-sm text-zinc-400 mb-4 italic">
-						The comparison below uses public product positioning for the other systems and local ResonantOS code/docs for ResonantOS facts.
-					</p>
 					<div class="space-y-2">
 						<p class="text-zinc-400"><strong class="text-zinc-200">For users:</strong> run AI-assisted work from a product experience built around visibility and control.</p>
 						<p class="text-zinc-400"><strong class="text-zinc-200">For builders:</strong> create add-ons that can be installed, inspected, improved, and shared by the community.</p>
 					</div>
 				</div>
 
-				<!-- Comparison Table -->
-				<div class="overflow-x-auto">
-					<table class="w-full border-collapse">
-						<thead>
-							<tr class="border-b border-zinc-800">
-								<th class="text-left py-4 px-4 text-sm font-mono text-zinc-400">System</th>
-								<th class="text-left py-4 px-4 text-sm font-mono text-zinc-400">Public Focus</th>
-								<th class="text-left py-4 px-4 text-sm font-mono text-zinc-400">Strong Fit</th>
-								<th class="text-left py-4 px-4 text-sm font-mono text-zinc-400">ResonantOS Today</th>
-							</tr>
-						</thead>
-						<tbody class="text-sm">
-							<tr class="border-b border-zinc-800/50">
-								<td class="py-4 px-4 text-zinc-100 font-semibold">OpenClaw</td>
-								<td class="py-4 px-4 text-zinc-300">Personal AI assistant with chat-app access, memory, browser control, full system access, and skills/plugins.</td>
-								<td class="py-4 px-4 text-zinc-400">Power users who want a hands-on agent that can operate across their machine and services.</td>
-								<td class="py-4 px-4 text-blue-400">ResonantOS is an OpenClaw-compatible experience layer with a local dashboard for gateway status, agents, sessions, LCM, Shield, SSoT, Policy Graph, and settings.</td>
-							</tr>
-							<tr class="border-b border-zinc-800/50">
-								<td class="py-4 px-4 text-zinc-100 font-semibold">Hermes Agent</td>
-								<td class="py-4 px-4 text-zinc-300">Open-source agent CLI for coding, research, development, memory, learned skills, and multi-model operation.</td>
-								<td class="py-4 px-4 text-zinc-400">Terminal/server users who want an agent that learns procedures and can run through messaging channels.</td>
-								<td class="py-4 px-4 text-blue-400">ResonantOS exposes SSoT document management, compressed `.ai.md` derivatives, memory/SSoT access controls, and local agent configuration through the dashboard.</td>
-							</tr>
-							<tr class="border-b border-zinc-800/50">
-								<td class="py-4 px-4 text-zinc-100 font-semibold">Paperclip</td>
-								<td class="py-4 px-4 text-zinc-300">Management layer for existing agents: org structure, budgets, approvals, activity trails, and runtime-agnostic oversight.</td>
-								<td class="py-4 px-4 text-zinc-400">People already running multiple agents who need governance, costs, and accountability.</td>
-								<td class="py-4 px-4 text-blue-400">ResonantOS includes local management surfaces for agents, skills, plugins, projects, Shield status, token/cost tracking plugins, and policy visualization.</td>
-							</tr>
-							<tr class="border-b border-zinc-800/50">
-								<td class="py-4 px-4 text-zinc-100 font-semibold">Devin</td>
-								<td class="py-4 px-4 text-zinc-300">Autonomous AI software engineer for writing, running, testing, and reviewing code through tools like shell, IDE, and browser.</td>
-								<td class="py-4 px-4 text-zinc-400">Engineering teams that want backlog tasks, bug fixes, migrations, testing, and PR work handled by an AI teammate.</td>
-								<td class="py-4 px-4 text-blue-400">ResonantOS has a Coding Agents module entry for comparing OpenHands, Codex, and Claude Code, plus broader modules for SSoT, Shield, Wallet & DAO, Docs, and add-ons.</td>
-							</tr>
-							<tr class="border-b border-zinc-800/50">
-								<td class="py-4 px-4 text-zinc-100 font-semibold">OpenHands</td>
-								<td class="py-4 px-4 text-zinc-300">Open platform for software-development agents that write code, use a command line, browse the web, and run in sandboxed environments.</td>
-								<td class="py-4 px-4 text-zinc-400">Developers and researchers building or evaluating software agents.</td>
-								<td class="py-4 px-4 text-blue-400">ResonantOS is not only a software-agent workbench; the dashboard code includes agent management, project/workspace modules, security layers, documentation, and wallet/DAO surfaces.</td>
-							</tr>
-							<tr class="border-b border-zinc-800/50">
-								<td class="py-4 px-4 text-zinc-100 font-semibold">AutoGPT</td>
-								<td class="py-4 px-4 text-zinc-300">Platform for creating, deploying, and managing continuous AI agents, with self-hosting, cloud plans, and a marketplace direction.</td>
-								<td class="py-4 px-4 text-zinc-400">Users and builders who want to compose agents for repeatable automated workflows.</td>
-								<td class="py-4 px-4 text-blue-400">ResonantOS has a module/add-on registry, enabled and disabled workspace modules, a concrete R-Code add-on package, and OpenClaw plugin integration for custom capabilities.</td>
-							</tr>
-							<tr class="border-b border-zinc-800/50">
-								<td class="py-4 px-4 text-zinc-100 font-semibold">Manus</td>
-								<td class="py-4 px-4 text-zinc-300">Hosted general AI agent that turns ideas into completed tasks across travel, finance, research, education, development, and business cases.</td>
-								<td class="py-4 px-4 text-zinc-400">People who want cloud-hosted delegation for broad one-off or multi-step outcomes.</td>
-								<td class="py-4 px-4 text-blue-400">ResonantOS runs as a local web dashboard, keeps the management layer on the user's machine, and connects DAO/wallet features through the Wallet & DAO module.</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-
-				<div class="mt-8 p-6 bg-blue-950/20 border border-blue-800/30 rounded-lg">
+				<div class="p-6 bg-blue-950/20 border border-blue-800/30 rounded-lg">
 					<p class="text-lg text-zinc-200">
 						<strong>Bottom line:</strong> ResonantOS is the app for operating AI agents as a customizable working system.
 					</p>
