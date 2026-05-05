@@ -3,14 +3,14 @@ const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
 
 const links = [
 	{ label: 'Home', href: '/', activePath: '/' },
-	{ label: 'About', href: '/about', activePath: '/about' },
-	{ label: 'Economy', href: '/#economy' },
-	{ label: 'Features', href: '/#features' },
-	{ label: 'Whitepaper', href: '/whitepaper', activePath: '/whitepaper' },
+	{ label: 'Manifesto', href: '/manifesto', activePath: '/manifesto' },
+	{ label: 'Membership', href: '/membership', activePath: '/membership' },
 	{ label: 'DAO', href: '/dao', activePath: '/dao' },
-	{ label: 'Symbiotic License', href: '/symbiotic-license', activePath: '/symbiotic-license' },
+	{ label: 'Licence', href: '/symbiotic-license', activePath: '/symbiotic-license' },
+	{ label: 'Pioneer', href: '/pioneer', activePath: '/pioneer' },
+	{ label: 'Whitepaper', href: '/whitepaper', activePath: '/whitepaper' },
+	{ label: 'About', href: '/about', activePath: '/about' },
 	{ label: 'FAQ', href: '/#faq' },
-	{ label: 'YouTube', href: 'https://www.youtube.com/@manolo.remiddi', external: true },
 	{ label: 'Blog', href: 'https://augmentedmind.co/', external: true },
 ];
 
@@ -38,8 +38,8 @@ const linkClass = (activePath?: string) =>
 							{link.label}
 						</a>
 					))}
-					<a href="/#waitlist" class="flex-none text-sm bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-md transition-colors whitespace-nowrap">
-						Get Started
+					<a href="/membership" class="flex-none text-sm bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-md transition-colors whitespace-nowrap">
+						Join DAO
 					</a>
 				</div>
 			</div>
