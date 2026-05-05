@@ -176,12 +176,12 @@ import SiteNav from '../components/SiteNav.astro';
 			</div>
 		</section>
 
-		<!-- Comparison Table -->
+		<!-- Capability Grid -->
 		<section class="py-20 px-4 sm:px-6 lg:px-8">
 			<div class="max-w-6xl mx-auto">
-				<h2 class="text-4xl sm:text-5xl font-bold mb-6 tracking-tight">ResonantOS vs. Other AI Agent Systems</h2>
+				<h2 class="text-4xl sm:text-5xl font-bold mb-6 tracking-tight">AI Agent <span class="gradient-text">Capability</span> Grid</h2>
 				<p class="text-xl text-zinc-400 mb-12 max-w-3xl">
-					<strong class="text-zinc-200">The agent category is splitting into different shapes.</strong> Some tools are personal assistants, some manage fleets, some focus on software engineering, and some run hosted general tasks. ResonantOS is positioned as the operating app around the user's AI work.
+					<strong class="text-zinc-200">Different agent systems solve different parts of the problem.</strong> This grid compares practical functions: local control, browser use, coding, memory, add-ons, approvals, and ownership.
 				</p>
 				
 				<div class="grid grid-cols-1 gap-4 mb-8">
@@ -211,6 +211,129 @@ import SiteNav from '../components/SiteNav.astro';
 						<p class="text-zinc-400"><strong class="text-zinc-200">For users:</strong> run AI-assisted work from a product experience built around visibility and control.</p>
 						<p class="text-zinc-400"><strong class="text-zinc-200">For builders:</strong> create add-ons that can be installed, inspected, improved, and shared by the community.</p>
 					</div>
+				</div>
+
+				<p class="text-sm text-zinc-500 mb-4">
+					Legend: <span class="text-green-400 font-medium">Yes</span> = clearly supported, <span class="text-amber-400 font-medium">Partial</span> = limited scope or depends on setup, <span class="text-zinc-400">Not clear</span> = not enough public documentation.
+				</p>
+
+				<div class="overflow-x-auto mb-8">
+					<table class="w-full min-w-[1100px] border-collapse">
+						<thead>
+							<tr class="border-b border-zinc-800">
+								<th class="text-left py-4 px-4 text-sm font-mono text-zinc-400">Functionality</th>
+								<th class="text-center py-4 px-4 text-sm font-mono text-zinc-400">ResonantOS</th>
+								<th class="text-center py-4 px-4 text-sm font-mono text-zinc-400">OpenClaw</th>
+								<th class="text-center py-4 px-4 text-sm font-mono text-zinc-400">Hermes</th>
+								<th class="text-center py-4 px-4 text-sm font-mono text-zinc-400">Paperclip</th>
+								<th class="text-center py-4 px-4 text-sm font-mono text-zinc-400">Devin</th>
+								<th class="text-center py-4 px-4 text-sm font-mono text-zinc-400">OpenHands</th>
+								<th class="text-center py-4 px-4 text-sm font-mono text-zinc-400">AutoGPT</th>
+								<th class="text-center py-4 px-4 text-sm font-mono text-zinc-400">Manus</th>
+							</tr>
+						</thead>
+						<tbody class="text-sm">
+							<tr class="border-b border-zinc-800/50">
+								<td class="py-4 px-4 text-zinc-300">Runs locally or self-hosted</td>
+								<td class="py-4 px-4 text-center text-green-400 font-medium">Yes</td>
+								<td class="py-4 px-4 text-center text-green-400 font-medium">Yes</td>
+								<td class="py-4 px-4 text-center text-green-400 font-medium">Yes</td>
+								<td class="py-4 px-4 text-center text-zinc-500">Not clear</td>
+								<td class="py-4 px-4 text-center text-zinc-500">No</td>
+								<td class="py-4 px-4 text-center text-amber-400 font-medium">Partial</td>
+								<td class="py-4 px-4 text-center text-green-400 font-medium">Yes</td>
+								<td class="py-4 px-4 text-center text-zinc-500">No</td>
+							</tr>
+							<tr class="border-b border-zinc-800/50">
+								<td class="py-4 px-4 text-zinc-300">Browser or web automation</td>
+								<td class="py-4 px-4 text-center text-green-400 font-medium">Yes</td>
+								<td class="py-4 px-4 text-center text-green-400 font-medium">Yes</td>
+								<td class="py-4 px-4 text-center text-amber-400 font-medium">Partial</td>
+								<td class="py-4 px-4 text-center text-zinc-500">Agent-dependent</td>
+								<td class="py-4 px-4 text-center text-green-400 font-medium">Yes</td>
+								<td class="py-4 px-4 text-center text-green-400 font-medium">Yes</td>
+								<td class="py-4 px-4 text-center text-amber-400 font-medium">Partial</td>
+								<td class="py-4 px-4 text-center text-green-400 font-medium">Yes</td>
+							</tr>
+							<tr class="border-b border-zinc-800/50">
+								<td class="py-4 px-4 text-zinc-300">Shell, files, and system tools</td>
+								<td class="py-4 px-4 text-center text-green-400 font-medium">Yes</td>
+								<td class="py-4 px-4 text-center text-green-400 font-medium">Yes</td>
+								<td class="py-4 px-4 text-center text-green-400 font-medium">Yes</td>
+								<td class="py-4 px-4 text-center text-zinc-500">Agent-dependent</td>
+								<td class="py-4 px-4 text-center text-green-400 font-medium">Yes</td>
+								<td class="py-4 px-4 text-center text-green-400 font-medium">Yes</td>
+								<td class="py-4 px-4 text-center text-amber-400 font-medium">Partial</td>
+								<td class="py-4 px-4 text-center text-amber-400 font-medium">Partial</td>
+							</tr>
+							<tr class="border-b border-zinc-800/50">
+								<td class="py-4 px-4 text-zinc-300">Software engineering workflow</td>
+								<td class="py-4 px-4 text-center text-amber-400 font-medium">Partial</td>
+								<td class="py-4 px-4 text-center text-amber-400 font-medium">Partial</td>
+								<td class="py-4 px-4 text-center text-green-400 font-medium">Yes</td>
+								<td class="py-4 px-4 text-center text-zinc-500">Agent-dependent</td>
+								<td class="py-4 px-4 text-center text-green-400 font-medium">Yes</td>
+								<td class="py-4 px-4 text-center text-green-400 font-medium">Yes</td>
+								<td class="py-4 px-4 text-center text-amber-400 font-medium">Partial</td>
+								<td class="py-4 px-4 text-center text-amber-400 font-medium">Partial</td>
+							</tr>
+							<tr class="border-b border-zinc-800/50">
+								<td class="py-4 px-4 text-zinc-300">Persistent memory or project context</td>
+								<td class="py-4 px-4 text-center text-green-400 font-medium">Yes</td>
+								<td class="py-4 px-4 text-center text-green-400 font-medium">Yes</td>
+								<td class="py-4 px-4 text-center text-green-400 font-medium">Yes</td>
+								<td class="py-4 px-4 text-center text-amber-400 font-medium">Partial</td>
+								<td class="py-4 px-4 text-center text-amber-400 font-medium">Partial</td>
+								<td class="py-4 px-4 text-center text-amber-400 font-medium">Partial</td>
+								<td class="py-4 px-4 text-center text-amber-400 font-medium">Partial</td>
+								<td class="py-4 px-4 text-center text-zinc-500">Not clear</td>
+							</tr>
+							<tr class="border-b border-zinc-800/50">
+								<td class="py-4 px-4 text-zinc-300">Custom add-ons, plugins, or skills</td>
+								<td class="py-4 px-4 text-center text-green-400 font-medium">Yes</td>
+								<td class="py-4 px-4 text-center text-green-400 font-medium">Yes</td>
+								<td class="py-4 px-4 text-center text-green-400 font-medium">Yes</td>
+								<td class="py-4 px-4 text-center text-amber-400 font-medium">Partial</td>
+								<td class="py-4 px-4 text-center text-zinc-500">Not clear</td>
+								<td class="py-4 px-4 text-center text-green-400 font-medium">Yes</td>
+								<td class="py-4 px-4 text-center text-green-400 font-medium">Yes</td>
+								<td class="py-4 px-4 text-center text-zinc-500">Not clear</td>
+							</tr>
+							<tr class="border-b border-zinc-800/50">
+								<td class="py-4 px-4 text-zinc-300">Multi-agent or fleet management</td>
+								<td class="py-4 px-4 text-center text-green-400 font-medium">Yes</td>
+								<td class="py-4 px-4 text-center text-amber-400 font-medium">Partial</td>
+								<td class="py-4 px-4 text-center text-amber-400 font-medium">Partial</td>
+								<td class="py-4 px-4 text-center text-green-400 font-medium">Yes</td>
+								<td class="py-4 px-4 text-center text-amber-400 font-medium">Partial</td>
+								<td class="py-4 px-4 text-center text-amber-400 font-medium">Partial</td>
+								<td class="py-4 px-4 text-center text-green-400 font-medium">Yes</td>
+								<td class="py-4 px-4 text-center text-amber-400 font-medium">Partial</td>
+							</tr>
+							<tr class="border-b border-zinc-800/50">
+								<td class="py-4 px-4 text-zinc-300">Approvals, budgets, and oversight</td>
+								<td class="py-4 px-4 text-center text-amber-400 font-medium">Partial</td>
+								<td class="py-4 px-4 text-center text-amber-400 font-medium">Partial</td>
+								<td class="py-4 px-4 text-center text-zinc-500">Not clear</td>
+								<td class="py-4 px-4 text-center text-green-400 font-medium">Yes</td>
+								<td class="py-4 px-4 text-center text-amber-400 font-medium">Partial</td>
+								<td class="py-4 px-4 text-center text-amber-400 font-medium">Partial</td>
+								<td class="py-4 px-4 text-center text-amber-400 font-medium">Partial</td>
+								<td class="py-4 px-4 text-center text-zinc-500">Not clear</td>
+							</tr>
+							<tr class="border-b border-zinc-800/50">
+								<td class="py-4 px-4 text-zinc-300">DAO, wallet, or co-ownership layer</td>
+								<td class="py-4 px-4 text-center text-green-400 font-medium">Yes</td>
+								<td class="py-4 px-4 text-center text-zinc-500">Not documented</td>
+								<td class="py-4 px-4 text-center text-zinc-500">Not documented</td>
+								<td class="py-4 px-4 text-center text-zinc-500">Not documented</td>
+								<td class="py-4 px-4 text-center text-zinc-500">Not documented</td>
+								<td class="py-4 px-4 text-center text-zinc-500">Not documented</td>
+								<td class="py-4 px-4 text-center text-zinc-500">Not documented</td>
+								<td class="py-4 px-4 text-center text-zinc-500">Not documented</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 
 				<div class="p-6 bg-blue-950/20 border border-blue-800/30 rounded-lg">
