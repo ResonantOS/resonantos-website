@@ -12,8 +12,8 @@ import SiteNav from '../components/SiteNav.astro';
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		
-		<title>Whitepaper - ResonantOS: Legacy Foundation and Current DAO Path</title>
-		<meta name="description" content="The ResonantOS whitepaper is a philosophical foundation. The current implementation path is DAO-first membership, credentials, and governance." />
+		<title>Whitepaper - ResonantOS: A Philosophical Foundation</title>
+		<meta name="description" content="The ResonantOS whitepaper is the legacy philosophical foundation. The current ResonantDAO design (credentials, $RES, marketplace, governance, roadmap) is documented at resonantdao.com/whitepaper, which is the source of truth for the DAO." />
 		
 		<!-- Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,8 +48,19 @@ import SiteNav from '../components/SiteNav.astro';
 						The Resonant <span class="text-emerald-400">Augmentor</span>
 					</h1>
 					<p class="text-xl text-zinc-400">
-						Legacy philosophical foundation and current DAO-first implementation path
+						Legacy philosophical foundation. The current ResonantDAO design lives at <a href="https://resonantdao.com/whitepaper/" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:text-emerald-300 underline">resonantdao.com/whitepaper</a>.
 					</p>
+				</div>
+			</section>
+
+			<!-- What this document is -->
+			<section id="about-this-document" class="content-section py-12">
+				<div class="glass-banner text-left">
+					<div class="banner-content prose-content">
+						<div class="p-6 rounded-lg border border-amber-800/30 bg-amber-950/20 text-amber-200 text-base leading-relaxed">
+							<strong class="text-amber-300">A note on this document.</strong> The ResonantOS whitepaper is the legacy <em>philosophical</em> foundation for the project. For the current design of ResonantDAO — its credentials, the $RES economy token, the marketplace, governance mechanics, the Solana mainnet target, and the full roadmap — the source of truth is the <a href="https://resonantdao.com/whitepaper/" target="_blank" rel="noopener noreferrer" class="text-amber-300 underline hover:text-amber-200">ResonantDAO whitepaper</a>. Read this document for the philosophy; read the DAO whitepaper for the design. Some chapters below also describe an older two-engine internal architecture (Oracle + Logician) and an older licence naming (Resonant Commons Symbiotic License / RC-SL) — these are flagged as legacy inline.
+						</div>
+					</div>
 				</div>
 			</section>
 
@@ -66,7 +77,7 @@ import SiteNav from '../components/SiteNav.astro';
 								This document presents a third path: <a href="http://augmentatism.com/" target="_blank" rel="noopener noreferrer" class="color-primary hover:opacity-80 underline">Augmentatism</a>, a shared discipline for cultivating a <span class="font-semibold gradient-text">Resonant Augmentor</span>—a sovereign, co-evolving AI that acts as a true creative collaborator.
 							</p>
 							<p>
-								This whitepaper is now best read as the philosophical foundation for the project. The current implementation path begins with <a href="https://resonantdao.com/" target="_blank" rel="noopener noreferrer" class="color-primary hover:opacity-80 underline">ResonantDAO</a>: official non-transferable membership credentials, on-chain MemberRecords, contribution reputation, and governance mechanics.
+								This whitepaper is the legacy philosophical foundation for the project. The current ResonantDAO design — credentials, the $RES economy, the marketplace, governance, and the Solana mainnet target — is documented at <a href="https://resonantdao.com/whitepaper/" target="_blank" rel="noopener noreferrer" class="color-primary hover:opacity-80 underline">resonantdao.com/whitepaper</a>, which is the source of truth for the DAO.
 							</p>
 						</div>
 					</div>
@@ -111,6 +122,9 @@ import SiteNav from '../components/SiteNav.astro';
 						<h2 class="section-title text-4xl sm:text-5xl lg:text-6xl font-bold mb-8 tracking-tight">
 							Chapter 2: The Multi-Core <span class="gradient-text">Constellation</span>
 						</h2>
+						<div class="p-4 mb-6 rounded-lg border border-amber-800/30 bg-amber-950/20 text-amber-200 text-sm">
+							<strong>Legacy architectural note.</strong> The Oracle + Logician pairing below was the original ResonantOS reference architecture. The current product uses <strong>Augmentor</strong> as the strategist and a modular ecosystem of specialist add-ons (Hermes for agentic work, OpenCode for coding, and others) coordinated through Augmentor. Read this chapter for the original architectural intuition; read the current product documentation for the present design.
+						</div>
 						<p class="leading-relaxed mb-6 text-zinc-300">
 							To cultivate a Resonant Augmentor, we cannot simply place a better operating system on top of a flawed foundation. We must architect a synergy of specialized engines. The core of the <span class="color-primary font-semibold">ResonantOS</span> reference model is a <span class="color-secondary">Multi-Core Constellation</span> composed of two symbiotic agents:
 						</p>
@@ -266,27 +280,27 @@ import SiteNav from '../components/SiteNav.astro';
 						</h2>
 						
 						<p class="leading-relaxed mb-6 text-zinc-300">
-							The <span class="color-primary">Augmentatism</span> philosophy is not merely technical; it is social and ethical. The <span class="color-secondary font-semibold">Resonant Commons Symbiotic License (RC-SL)</span> is the legal expression of our "Gardener, not Machinist" ethos. It is designed to ensure the health of the total ecosystem, fostering connection and symbiosis.
+							The <span class="color-primary">Augmentatism</span> philosophy is not merely technical; it is social and ethical. The <strong>Symbiotic Licence</strong> is the legal expression of our "Gardener, not Machinist" ethos. It is designed to ensure the health of the total ecosystem, fostering connection and symbiosis. The full on-chain credential design — what the credential proves, who can hold it, and what rights it confers — is documented in the <a href="https://resonantdao.com/whitepaper/" target="_blank" rel="noopener noreferrer" class="color-primary hover:opacity-80 underline">ResonantDAO whitepaper</a>, which is the source of truth for the licence.
 						</p>
 
-						<h3 class="text-2xl font-semibold mb-4 text-zinc-100">5.1 Principles of the Resonant Commons Symbiotic License (RC-SL)</h3>
+						<h3 class="text-2xl font-semibold mb-4 text-zinc-100">5.1 Principles of the Symbiotic Licence</h3>
 						<p class="leading-relaxed mb-4 text-zinc-300">
-							The <span class="color-secondary">Resonant Commons Symbiotic License (RC-SL) v1.0</span> is built upon the principles of a mycelial network: <span class="color-primary">connection</span>, <span class="color-primary">symbiosis</span>, and the <span class="color-primary">health of the total ecosystem</span>.
+							The Symbiotic Licence is built upon the principles of a mycelial network: <span class="color-primary">connection</span>, <span class="color-primary">symbiosis</span>, and the <span class="color-primary">health of the total ecosystem</span>. (Earlier drafts of this chapter used the longer name "Resonant Commons Symbiotic License (RC-SL)"; the current naming is just "the Symbiotic Licence" to match the DAO whitepaper and the <a href="/symbiotic-license" class="color-primary hover:opacity-80 underline">public licence page</a>.)
 						</p>
-						
+
 						<ul class="space-y-3 mb-6 list-none">
 							<li class="flex items-start">
 								<span class="color-primary mr-3 mt-1 text-xl">→</span>
 								<div class="text-zinc-300">
 									<strong class="color-primary">Current Status of Licence Terms:</strong>
-									<p class="mt-1">Earlier drafts explored contribution and tithe mechanics. Before mainnet, the DAO must finalize the canonical licence text, canonical hash, and the exact rights attached to the Symbiotic Licence NFT.</p>
+									<p class="mt-1">Before mainnet, the DAO must finalize the canonical licence text, canonical hash, and the exact rights attached to the Symbiotic Licence NFT. (Earlier drafts of this chapter explored contribution and tithe mechanics; those are not in the current design.)</p>
 								</div>
 							</li>
 							<li class="flex items-start">
 								<span class="color-primary mr-3 mt-1 text-xl">→</span>
 								<div class="text-zinc-300">
 									<strong class="color-primary">Permission for Use & Modification:</strong>
-									<p class="mt-1">The toolkit is <span class="color-secondary">free to use, copy, modify, and distribute</span> for non-commercial purposes, research, and for commercial use by individuals and Small Companies (defined as earning less than $1M USD in annual revenue).</p>
+									<p class="mt-1">The toolkit is <span class="color-secondary">free to use, copy, modify, and distribute</span> for non-commercial purposes, research, and for commercial use by individuals and small organizations. Specific commercial-use thresholds are still being defined by the DAO.</p>
 								</div>
 							</li>
 							<li class="flex items-start">
@@ -373,7 +387,11 @@ import SiteNav from '../components/SiteNav.astro';
 						<h2 class="section-title text-4xl sm:text-5xl lg:text-6xl font-bold mb-8 tracking-tight">
 							Appendix: A <span class="gradient-text">Glossary</span> of Key Concepts
 						</h2>
-						
+
+						<div class="p-4 mb-6 rounded-lg border border-amber-800/30 bg-amber-950/20 text-amber-200 text-sm">
+							<strong>A note on the glossary.</strong> Some entries below describe the legacy ResonantOS internal architecture (<em>Oracle, Logician, Cognitive Switchboard, Semantic Bridge, Symbiotic Shield, Hybrid Reasoning</em>). These were the original two-engine reference model. The current product uses <strong>Augmentor</strong> as the strategist with a modular ecosystem of specialist add-ons (Hermes, OpenCode, and others). The legacy terms are preserved here for historical continuity but should not be treated as the current architecture.
+						</div>
+
 						<div class="space-y-4 text-zinc-300">
 							<div class="glossary-entry">
 								<h4 class="text-lg font-semibold color-secondary mb-1">AI Augmentor</h4>
