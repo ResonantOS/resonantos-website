@@ -81,9 +81,11 @@
     background:var(--glass);
     -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
   }
-  .brand{font-family:var(--font-mono);font-weight:500;font-size:1.02rem;letter-spacing:.04em;display:flex;align-items:center;gap:9px}
+  .brand{font-family:var(--font-mono);font-weight:500;font-size:1.06rem;letter-spacing:.01em;display:flex;align-items:center;gap:10px;white-space:nowrap}
   .brand svg{width:22px;height:22px;flex:0 0 auto}
-  .brand .dao{font-family:var(--font-body);font-size:.5rem;font-style:italic;letter-spacing:.01em;color:var(--faint);text-transform:none;margin-left:2px;white-space:nowrap;opacity:.85}
+  .brand .wordmark{font-weight:600;letter-spacing:-.02em}
+  .brand .wordmark .os{background:linear-gradient(100deg,var(--jade),var(--amber));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .brand .dao{font-family:var(--font-body);font-size:.6rem;font-style:italic;letter-spacing:.01em;color:var(--faint);text-transform:none;margin-left:2px;white-space:nowrap;opacity:.9}
   nav.nav-links{display:flex;align-items:center;gap:clamp(10px,1.6vw,22px);font-family:var(--font-mono);font-size:.8rem;letter-spacing:.03em;color:var(--muted)}
   nav.nav-links a{transition:color .2s}
   nav.nav-links a:hover{color:var(--ink)}
@@ -319,7 +321,7 @@
 <header class="site-header">
   <a class="brand" href="/" aria-label="ResonantOS home">
     <svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5fd0a0"/><stop offset="1" stop-color="#e8a84c"/></linearGradient></defs><rect width="64" height="64" rx="14" fill="#0c1f15"/><path d="M19 48 L19 16 L31 16 C37 16 39 20 39 24 C39 28 37 32 31 32 L19 32 M31 32 L40 48" fill="none" stroke="url(#bg)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="48" cy="17" r="2.6" fill="#e7f8ef"/></svg>
-    Resonant<span class="jade">OS</span>
+    <span class="wordmark">Resonant<span class="os">OS</span></span>
     <span class="dao">a ResonantDAO project</span>
   </a>
   <nav class="nav-links">
@@ -341,7 +343,7 @@
 <section class="hero">
   <div class="wrap">
     <span class="hero-badge rv"><span class="dot"></span>the neutral baseplate for composable intelligence</span>
-    <h1 class="rv">We are not building another agent.<br>We build the <span class="glow">baseplate</span>.</h1>
+    <h1 class="rv">The baseplate where<br><span class="glow">intelligence composes</span>.</h1>
     <p class="lede rv">
       A small, restartable core with defined connection rules. Independent components —
       agents, memory, tools, workflows, surfaces — <b>plug in, combine, and can be removed</b>
