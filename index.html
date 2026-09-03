@@ -466,16 +466,36 @@
 <!-- ============ STANDARDS ============ -->
 <section class="section" id="standards">
   <div class="wrap">
-    <span class="eyebrow rv">standards — adopted, not invented</span>
-    <h2 class="sec-title rv">We don't replace MCP, A2A or SKILL.md.<br>We give them a <span class="glow">home</span>.</h2>
-    <p class="sec-lede rv">The interop standards already exist and are community-governed. We adopt them; we create only the contracts that no standard covers (memory, workflow runs, workspace embedding, signing ceremony).</p>
+    <span class="eyebrow rv">what we adopt · what we create</span>
+    <h2 class="sec-title rv">MCP and A2A define how agents talk.<br>We add <span class="glow">what nobody else ships</span>.</h2>
+    <p class="sec-lede rv">We adopt the open standards — and we build the pieces no standard covers: the missing protocols, the sovereign world, and the layer that runs everything safely on one machine.</p>
     <div class="gstrip" style="margin-top:34px">
-      <div class="gstep rv"><span class="k">adopt</span><b>MCP</b><span class="s2">tools &amp; resources connect through the Model Context Protocol</span></div>
-      <div class="gstep rv"><span class="k">adopt</span><b>A2A</b><span class="s2">agents interoperate through the Agent2Agent protocol</span></div>
-      <div class="gstep rv"><span class="k">adopt</span><b>SKILL.md</b><span class="s2">skills load as standard instruction packs</span></div>
-      <div class="gstep rv"><span class="k">create</span><b>what's missing</b><span class="s2">memory protocol · loops contract · signing ceremony</span></div>
+      <div class="gstep rv"><span class="k">adopt</span><b>MCP · A2A · SKILL.md</b><span class="s2">tools, agents and skills speak the community-governed standards</span></div>
+      <div class="gstep rv"><span class="k">adopt</span><b>CDP · Wayland · JSON-RPC</b><span class="s2">browsers, displays and chains connect through their native interfaces</span></div>
+      <div class="gstep rv"><span class="k">create</span><b>the missing protocols</b><span class="s2">memory · durable runs · workspace embedding · signing ceremony</span></div>
+      <div class="gstep rv"><span class="k">create</span><b>the sovereign layer</b><span class="s2">private worlds · shared worlds by agreement · evidence of what happened</span></div>
     </div>
-    <p class="proof-note rv" style="max-width:62ch">Extensions we add to adopted standards are additive and optional — unmodified community artifacts keep working. The baseplate is what lets a <b>heterogeneous</b> system — different standards, different vendors, different models — run on one machine without breaking each other.</p>
+
+    <div class="jobs" style="margin-top:20px">
+      <div class="job rv">
+        <span class="n">01</span>
+        <div><h3>The memory protocol</h3><p>No cross-vendor, owner-controlled memory standard exists. We publish one: read, write, search, update, expire, snapshot — with declared durability and evidence roles. MCP's <em>resources</em> are read-only; memory that outlives sessions needs a real protocol.</p></div>
+      </div>
+      <div class="job rv">
+        <span class="n">02</span>
+        <div><h3>Durable runs &amp; the consequence protocol</h3><p>Runs that survive their process — and irreversible actions that persist intent, expose <em>unknown</em> outcomes, and reconcile reality before retrying. No duplicate payments, publishes or sends.</p></div>
+      </div>
+      <div class="job rv">
+        <span class="n">03</span>
+        <div><h3>The sovereign world</h3><p>One machine, many principals: each gets a private world no one else can read. Shared worlds exist only by agreement, with roles and quorum. Delegation can only shrink. Nobody has ever shipped this for agent systems.</p></div>
+      </div>
+      <div class="job rv">
+        <span class="n">04</span>
+        <div><h3>The evidence spine</h3><p>Every consequential action leaves a record you can read: who allowed it, what it touched, what happened — with observed facts kept apart from agent reasoning. "Why did you do that?" is answered from the log, not guessed by the model.</p></div>
+      </div>
+    </div>
+
+    <p class="proof-note rv" style="max-width:64ch">Extensions to adopted standards are additive and optional — unmodified community artifacts keep working. Everything we create is a public, versioned spec; the baseplate is what lets a <b>heterogeneous</b> system — different standards, different vendors, different models — run on one machine without breaking each other.</p>
   </div>
 </section>
 
