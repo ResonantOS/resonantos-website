@@ -1,43 +1,21 @@
-# Astro Starter Kit: Minimal
+# ResonantOS website (resonantos.com)
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Public website for ResonantOS — the neutral baseplate for composable intelligence. A ResonantDAO project.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Served by GitHub Pages at https://resonantos.com from the repository root (`index.html`), with no build step.
 
-## 🚀 Project Structure
+## Structure
 
-Inside of your Astro project, you'll see the following folders and files:
+| Path | What it is |
+|---|---|
+| `index.html` | The site — single self-contained page (CSS/JS inline), dark + light themes, DAO visual system |
+| `archive/` | Previous Astro-based site, preserved (see `archive/README.md`) |
+| `.github/workflows/deploy-pages.yml` | Deploys the repository root to GitHub Pages on push to `main` |
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## Editing
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+The page is intentionally a single file with no dependencies. Open `index.html` locally (or `python3 -m http.server`) to preview. Push to `main` to deploy.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Theme
 
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Dark/light toggle in the header (sun/moon icons). Choice persists in `localStorage`; default follows the system preference.

@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ResonantOS — the neutral baseplate for composable intelligence</title>
+<meta name="description" content="ResonantOS is the neutral baseplate for composable intelligence: a small, restartable core with defined connection rules, into which independent components plug, combine, and can be removed without the system going down. A ResonantDAO project.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%235fd0a0'/%3E%3Cstop offset='1' stop-color='%23e8a84c'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%230c1f15'/%3E%3Cpath d='M19 48 L19 16 L31 16 C37 16 39 20 39 24 C39 28 37 32 31 32 L19 32 M31 32 L40 48' fill='none' stroke='url(%23g)' stroke-width='4.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='48' cy='17' r='2.6' fill='%23e7f8ef'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&family=Space+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ============ theme tokens ============ */
+  :root{
+    --font-display:"Fraunces",Georgia,serif;
+    --font-body:"Space Grotesk","DM Sans",system-ui,sans-serif;
+    --font-mono:"IBM Plex Mono","JetBrains Mono",ui-monospace,monospace;
+  }
+  [data-theme="dark"]{
+    color-scheme:dark;
+    --bg-a:#0c1f15; --bg-b:#0a1b12; --bg-c:#0c1f15;
+    --ink:#e4efe4; --ink-soft:#c9dcc9; --muted:#8fae97; --faint:#5d7f6c;
+    --jade:#5fd0a0; --jade-2:#8fe0b8; --amber:#e8a84c;
+    --line:rgba(95,208,160,.16);
+    --panel:rgba(22,46,34,.72); --panel-solid:#162e22;
+    --glass:rgba(10,25,17,.6);
+    --hero-fade:rgba(0,0,0,.35);
+    --grid-line:rgba(95,208,160,.05);
+    --card-bg:linear-gradient(160deg,rgba(95,208,160,.07),rgba(232,168,76,.04));
+    --cta-ink:#0c1f15;
+    --marquee-bg:rgba(10,25,17,.5);
+  }
+  [data-theme="light"]{
+    color-scheme:light;
+    --bg-a:#f7f4ea; --bg-b:#fbfaf3; --bg-c:#f2eee0;
+    --ink:#1c3a2c; --ink-soft:#3d5549; --muted:#5c6f63; --faint:#8a988e;
+    --jade:#0f7a56; --jade-2:#129465; --amber:#a8690f;
+    --line:rgba(12,100,70,.22);
+    --panel:rgba(255,255,255,.72); --panel-solid:#ffffff;
+    --glass:rgba(255,255,255,.78);
+    --hero-fade:rgba(255,255,255,.25);
+    --grid-line:rgba(12,100,70,.06);
+    --card-bg:linear-gradient(160deg,rgba(15,122,86,.06),rgba(168,105,15,.05));
+    --cta-ink:#f7f4ea;
+    --marquee-bg:rgba(240,236,220,.6);
+  }
+  /* ============ base ============ */
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--font-body);
+    background:
+      radial-gradient(ellipse 70% 55% at 85% -10%,rgba(95,208,160,.14),transparent 60%),
+      radial-gradient(ellipse 60% 50% at -10% 105%,rgba(232,168,76,.09),transparent 60%),
+      linear-gradient(180deg,var(--bg-a) 0%,var(--bg-b) 50%,var(--bg-c) 100%);
+    background-attachment:fixed;
+    color:var(--ink);
+    line-height:1.6;
+    transition:background .3s ease,color .3s ease;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background-image:linear-gradient(var(--grid-line) 1px,transparent 1px),
+      linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);
+    background-size:72px 72px;
+    -webkit-mask-image:radial-gradient(ellipse 90% 65% at 50% 0%,black 25%,transparent 75%);
+    mask-image:radial-gradient(ellipse 90% 65% at 50% 0%,black 25%,transparent 75%);
+  }
+  h1,h2,h3{font-family:var(--font-display);font-weight:300;letter-spacing:-.015em;line-height:1.08}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+  .mono{font-family:var(--font-mono)}
+  .jade{color:var(--jade)} .amber{color:var(--amber)}
+  ::selection{background:var(--amber);color:var(--bg-b)}
+  /* ============ header ============ */
+  header.site-header{
+    position:sticky;top:0;z-index:40;
+    display:flex;align-items:center;justify-content:space-between;gap:20px;
+    padding:0 max(16px,calc((100% - 1120px)/2));
+    min-height:64px;border-bottom:1px solid var(--line);
+    background:var(--glass);
+    -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+  }
+  .brand{font-family:var(--font-mono);font-weight:500;font-size:1.02rem;letter-spacing:.04em;display:flex;align-items:center;gap:9px}
+  .brand svg{width:22px;height:22px;flex:0 0 auto}
+  .brand .dao{font-size:.62rem;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;margin-left:2px}
+  nav.nav-links{display:flex;align-items:center;gap:clamp(10px,1.6vw,22px);font-family:var(--font-mono);font-size:.8rem;letter-spacing:.03em;color:var(--muted)}
+  nav.nav-links a{transition:color .2s}
+  nav.nav-links a:hover{color:var(--ink)}
+  nav.nav-links .ext::after{content:"↗";font-size:.7em;margin-left:2px;opacity:.7}
+  .nav-cta{
+    font-family:var(--font-mono);font-size:.78rem;letter-spacing:.04em;
+    background:linear-gradient(100deg,var(--jade),var(--jade-2));color:var(--cta-ink);
+    padding:8px 16px;border-radius:100px;font-weight:500;
+    box-shadow:0 0 18px rgba(95,208,160,.25);
+    transition:box-shadow .25s,transform .25s;white-space:nowrap;
+  }
+  .nav-cta:hover{box-shadow:0 0 30px rgba(95,208,160,.5);transform:translateY(-1px);color:var(--cta-ink)}
+  .theme-toggle{
+    display:inline-flex;align-items:center;gap:2px;border:1px solid var(--line);
+    border-radius:100px;padding:4px;cursor:pointer;background:transparent;
+    font-family:var(--font-mono);font-size:.7rem;color:var(--muted);letter-spacing:.06em;
+  }
+  .theme-toggle:hover{color:var(--jade);border-color:rgba(95,208,160,.4)}
+  .theme-toggle .seg{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:100px;color:var(--faint);transition:all .2s}
+  .theme-toggle .seg svg{width:15px;height:15px}
+  .theme-toggle .seg.on{background:rgba(95,208,160,.18);color:var(--jade)}
+  /* ============ hero ============ */
+  .hero{position:relative;min-height:calc(100vh - 64px);display:flex;align-items:center;padding:9vh 0 10vh;overflow:hidden}
+  .hero-badge{
+    display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:.7rem;
+    letter-spacing:.2em;text-transform:uppercase;color:var(--muted);
+    border:1px solid var(--line);border-radius:100px;padding:8px 16px;margin-bottom:30px;
+    background:var(--glass);
+  }
+  .hero-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--jade);box-shadow:0 0 8px var(--jade);animation:pulse 2.4s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  .hero h1{
+    font-size:clamp(2.9rem,7.6vw,6.4rem);max-width:18ch;font-weight:300;
+  }
+  .hero h1 em{font-style:italic}
+  .hero h1 .glow{
+    background:linear-gradient(100deg,var(--jade),var(--jade-2),var(--amber));
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .hero .lede{margin-top:26px;max-width:56ch;color:var(--ink-soft);font-size:clamp(1.02rem,1.6vw,1.22rem);line-height:1.65}
+  .hero .lede b{color:var(--ink);font-weight:600}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+  .button{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;
+    padding:.8rem 1.5rem;border-radius:100px;font-family:var(--font-mono);font-size:.85rem;
+    letter-spacing:.04em;font-weight:500;cursor:pointer;transition:all .25s;border:1px solid transparent;
+  }
+  .button.primary{background:linear-gradient(100deg,var(--jade),var(--jade-2));color:var(--cta-ink);box-shadow:0 0 24px rgba(95,208,160,.3)}
+  .button.primary:hover{box-shadow:0 0 44px rgba(95,208,160,.55);transform:translateY(-1px)}
+  .button.ghost{border-color:var(--line);color:var(--ink-soft);background:var(--glass)}
+  .button.ghost:hover{border-color:rgba(95,208,160,.5);color:var(--jade)}
+  .scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);display:flex;flex-direction:column;align-items:center;gap:8px}
+  .scroll-hint .chev{animation:drop 1.8s infinite}
+  @keyframes drop{0%{opacity:0;transform:translateY(-4px)}40%{opacity:1}100%{opacity:0;transform:translateY(6px)}}
+  /* ============ marquee ============ */
+  .marquee{
+    overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    background:var(--marquee-bg);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  }
+  .marquee-track{display:flex;gap:0;width:max-content;animation:scrollx 36s linear infinite;padding:14px 0}
+  .marquee span{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);padding:0 22px;white-space:nowrap}
+  .marquee span b{color:var(--amber);font-weight:400;padding:0 4px}
+  @keyframes scrollx{to{transform:translateX(-50%)}}
+  /* ============ sections ============ */
+  section.section{padding:96px 0}
+  .eyebrow{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--jade);margin-bottom:18px;display:block}
+  h2.sec-title{font-size:clamp(1.9rem,3.8vw,3.2rem);max-width:24ch}
+  h2.sec-title em{font-style:italic;color:var(--ink)}
+  h2.sec-title .glow{background:linear-gradient(100deg,var(--jade),var(--amber));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .sec-lede{margin-top:16px;max-width:64ch;color:var(--ink-soft);font-size:1.05rem}
+  .sec-lede b{color:var(--ink);font-weight:600}
+  /* two columns */
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:44px}
+  .shape{border:1px solid var(--line);border-radius:18px;padding:30px;background:var(--card-bg);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:border-color .3s}
+  .shape:hover{border-color:rgba(95,208,160,.45)}
+  .shape .tag{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;display:flex;align-items:center;gap:10px;margin-bottom:18px}
+  .shape.x .tag{color:#e2807e} .shape.ok .tag{color:var(--jade)}
+  .shape.x{border-color:rgba(226,128,126,.3)}
+  .shape h3{font-size:1.5rem;margin-bottom:10px}
+  .shape p{color:var(--ink-soft);font-size:.98rem}
+  .shape.x p{color:var(--muted)}
+  .shape ul{list-style:none;margin-top:16px;display:grid;gap:10px}
+  .shape li{display:flex;gap:10px;align-items:baseline;color:var(--ink-soft);font-size:.95rem}
+  .shape li .mk{font-family:var(--font-mono);flex:0 0 auto}
+  .shape.x li .mk{color:#e2807e} .shape.ok li .mk{color:var(--jade)}
+  .shape.ok li b{color:var(--jade);font-weight:500}
+  .shape li b{color:var(--ink);font-weight:500}
+  /* ============ baseplate diagram ============ */
+  .diagram-wrap{margin-top:52px;display:flex;justify-content:center}
+  .baseplate{width:min(860px,100%)}
+  .slots{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px}
+  .slot{
+    border:1.5px dashed var(--line);border-radius:12px;padding:18px 12px;text-align:center;
+    background:var(--glass);transition:border-color .3s,transform .3s;
+  }
+  .slot:hover{border-color:rgba(95,208,160,.6);transform:translateY(-2px)}
+  .slot .ic{display:block;font-size:1.3rem;margin-bottom:8px;color:var(--muted)}
+  .slot .nm{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  .slot.fill{border-style:solid;border-color:rgba(95,208,160,.55);background:linear-gradient(160deg,rgba(95,208,160,.14),rgba(95,208,160,.04))}
+  .slot.fill .ic,.slot.fill .nm{color:var(--jade)}
+  .slot.fill .nm{font-weight:500}
+  .slot.open{border-style:dashed}
+  .slot.open .nm{color:var(--faint)}
+  .connect{
+    display:flex;align-items:center;gap:14px;margin:14px auto;color:var(--faint);
+    font-family:var(--font-mono);font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;max-width:560px;
+  }
+  .connect::before,.connect::after{content:"";flex:1;height:1px;background:var(--line)}
+  .core{
+    border:1.5px solid rgba(95,208,160,.5);border-radius:18px;padding:26px 20px;text-align:center;
+    background:linear-gradient(180deg,rgba(95,208,160,.08),transparent);
+    box-shadow:0 0 50px rgba(95,208,160,.08);
+  }
+  .core .k{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:var(--jade);margin-bottom:14px}
+  .core .fns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .core .fn{font-family:var(--font-mono);font-size:.8rem;letter-spacing:.08em;color:var(--ink-soft);border:1px solid var(--line);border-radius:100px;padding:8px 18px;background:var(--glass)}
+  .core .fn b{color:var(--jade);font-weight:500}
+  .diagram-caption{text-align:center;margin-top:20px;color:var(--muted);font-size:.92rem;max-width:52ch;margin-left:auto;margin-right:auto}
+  .diagram-caption b{color:var(--ink)}
+  /* ============ job rows ============ */
+  .jobs{margin-top:46px;max-width:760px}
+  .job{display:flex;gap:22px;padding:22px 0;border-bottom:1px solid var(--line);align-items:baseline}
+  .job:first-child{border-top:1px solid var(--line)}
+  .job .n{font-family:var(--font-mono);font-size:1.2rem;color:var(--jade);flex:0 0 46px;font-weight:500}
+  .job h3{font-size:1.25rem;margin-bottom:4px}
+  .job p{color:var(--muted);font-size:.94rem}
+  .exclude{margin-top:30px;display:flex;gap:10px;flex-wrap:wrap}
+  .xchip{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.06em;color:var(--muted);border:1px solid var(--line);border-radius:100px;padding:8px 16px;background:var(--glass)}
+  .xchip b{color:var(--jade);font-weight:500}
+  .xchip.no b{color:var(--amber)}
+  /* ============ rules ============ */
+  .rules-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:44px}
+  .rule{
+    border:1px solid var(--line);border-radius:16px;padding:26px 22px;
+    background:var(--card-bg);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+    transition:border-color .3s,transform .3s,box-shadow .3s;
+  }
+  .rule:hover{border-color:rgba(95,208,160,.5);transform:translateY(-3px);box-shadow:0 20px 44px -20px rgba(0,0,0,.4)}
+  .rule .no{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.24em;color:var(--amber);display:block;margin-bottom:14px}
+  .rule h3{font-size:1.3rem;margin-bottom:8px}
+  .rule p{color:var(--ink-soft);font-size:.92rem}
+  /* ============ guarantee strip ============ */
+  .gstrip{display:flex;align-items:stretch;gap:10px;margin-top:44px;flex-wrap:wrap}
+  .gstep{flex:1;min-width:180px;border:1px solid var(--line);border-radius:14px;padding:20px;background:var(--glass)}
+  .gstep .k{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);display:block;margin-bottom:10px}
+  .gstep b{font-family:var(--font-display);font-weight:400;font-size:1.15rem;display:block;line-height:1.3}
+  .gstep .s2{color:var(--muted);font-size:.85rem;margin-top:8px;display:block;line-height:1.5}
+  .gstep.red{border-color:rgba(226,128,126,.4)} .gstep.red b{color:#e2807e}
+  .gstep.good{border-color:rgba(95,208,160,.45)} .gstep.good b{color:var(--jade)}
+  .garr{display:flex;align-items:center;color:var(--faint);font-family:var(--font-mono);padding:0 2px;font-size:1rem}
+  /* ============ proof timeline ============ */
+  .proof{display:flex;align-items:stretch;gap:10px;margin-top:44px;flex-wrap:wrap}
+  .pstep{flex:1;min-width:150px;border:1px solid var(--line);border-radius:14px;padding:20px;background:var(--glass)}
+  .pstep .n{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.2em;color:var(--faint);display:block;margin-bottom:12px}
+  .pstep .world{font-size:.95rem;color:var(--ink-soft);line-height:1.5}
+  .pstep .world b{color:var(--jade);font-weight:500;font-family:var(--font-mono);font-size:.8rem;letter-spacing:.05em}
+  .pstep.dark h4{color:var(--jade);font-weight:400;font-family:var(--font-display);font-size:1.15rem}
+  .pstep .note{display:block;margin-top:8px;color:var(--muted);font-size:.8rem}
+  .proof-note{margin-top:26px;color:var(--muted);max-width:58ch;font-size:.98rem}
+  .proof-note b{color:var(--ink)}
+  /* ============ daosection / cta ============ */
+  .dao-band{
+    border:1px solid var(--line);border-radius:22px;padding:clamp(28px,5vw,56px);margin-top:44px;
+    background:var(--card-bg);position:relative;overflow:hidden;
+  }
+  .dao-band::after{
+    content:"";position:absolute;top:-40%;right:-15%;width:55%;aspect-ratio:1;border-radius:50%;
+    background:radial-gradient(circle,rgba(232,168,76,.14),transparent 65%);filter:blur(40px);pointer-events:none;
+  }
+  .dao-band .row1{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-start;position:relative;z-index:1}
+  .dao-band h3{font-size:clamp(1.6rem,3vw,2.4rem);max-width:20ch}
+  .dao-band h3 .glow{background:linear-gradient(100deg,var(--jade),var(--amber));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .dao-tag{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);border:1px solid rgba(232,168,76,.4);border-radius:100px;padding:8px 16px;white-space:nowrap}
+  .dao-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:34px;position:relative;z-index:1}
+  .dao-col{border:1px solid var(--line);border-radius:14px;padding:22px;background:var(--glass)}
+  .dao-col .t{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--jade);display:block;margin-bottom:12px}
+  .dao-col ul{list-style:none;display:grid;gap:8px}
+  .dao-col li{color:var(--ink-soft);font-size:.92rem;display:flex;gap:8px}
+  .dao-col li::before{content:"→";color:var(--amber);font-family:var(--font-mono)}
+  .dao-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px;position:relative;z-index:1}
+  .cta-final{
+    text-align:center;padding:110px 0 60px;
+  }
+  .cta-final h2{font-size:clamp(2.2rem,5vw,4.2rem);max-width:22ch;margin:0 auto}
+  .cta-final .lede{color:var(--ink-soft);max-width:52ch;margin:22px auto 0;font-size:1.08rem}
+  .cta-final .lede b{color:var(--ink)}
+  .cta-final .actions{justify-content:center}
+  /* ============ footer ============ */
+  footer.site-footer{
+    border-top:1px solid var(--line);padding:56px 0 40px;margin-top:40px;background:var(--glass);
+    -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  }
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px}
+  @media(max-width:820px){.footer-grid{grid-template-columns:1fr 1fr}}
+  .footer-grid h4{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);margin-bottom:16px;font-weight:500}
+  .footer-grid p{color:var(--muted);font-size:.92rem;max-width:34ch}
+  .footer-grid ul{list-style:none;display:grid;gap:10px}
+  .footer-grid a{color:var(--muted);font-size:.9rem;transition:color .2s}
+  .footer-grid a:hover{color:var(--jade)}
+  .footer-grid .dao-link{color:var(--amber)}
+  .footer-grid .dao-link:hover{color:var(--amber);opacity:.85}
+  .footer-bottom{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--faint);font-size:.8rem;font-family:var(--font-mono)}
+  .footer-bottom a{color:var(--muted)} .footer-bottom a:hover{color:var(--jade)}
+  /* ============ reveal ============ */
+  html.js .rv{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+  html.js .rv.on{opacity:1;transform:none}
+  @media(max-width:900px){
+    .twocol{grid-template-columns:1fr}
+    nav.nav-links .hide-sm{display:none}
+    .hero{padding-top:7vh}
+  }
+  @media(max-width:760px){
+    header.site-header{padding:0 14px}
+    .brand .dao{display:none}
+    nav.nav-links{gap:10px}
+    .brand{font-size:.92rem}
+  }
+  @media(max-width:560px){
+    header.site-header{flex-wrap:wrap;padding-top:10px;padding-bottom:10px;min-height:auto}
+    nav.nav-links{flex:1 1 auto;justify-content:flex-end;gap:10px}
+    nav.nav-links a[data-sm-hide]{display:none}
+    .theme-toggle{order:2;padding:4px}
+    .theme-toggle .seg{padding:2px 6px}
+    .nav-cta{flex:0 0 auto;text-align:center;padding:7px 12px;font-size:.72rem}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="/" aria-label="ResonantOS home">
+    <svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5fd0a0"/><stop offset="1" stop-color="#e8a84c"/></linearGradient></defs><rect width="64" height="64" rx="14" fill="#0c1f15"/><path d="M19 48 L19 16 L31 16 C37 16 39 20 39 24 C39 28 37 32 31 32 L19 32 M31 32 L40 48" fill="none" stroke="url(#bg)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="48" cy="17" r="2.6" fill="#e7f8ef"/></svg>
+    Resonant<span class="jade">OS</span>
+    <span class="dao">a ResonantDAO project</span>
+  </a>
+  <nav class="nav-links">
+    <a href="#gap" data-sm-hide>Why</a>
+    <a href="#core" data-sm-hide>Architecture</a>
+    <a href="#rules" data-sm-hide>Rules</a>
+    <a href="#guarantee" data-sm-hide>Guarantee</a>
+    <a href="#dao">DAO</a>
+    <a class="ext hide-sm" href="https://resonantdao.com/" target="_blank" rel="noopener noreferrer">resonantdao.com</a>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle color theme">
+      <span class="seg" data-mode="dark" role="img" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+      <span class="seg" data-mode="light" role="img" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></span>
+    </button>
+    <a class="nav-cta" href="https://discord.gg/MRESQnf4R4" target="_blank" rel="noopener noreferrer">Build with us</a>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap">
+    <span class="hero-badge rv"><span class="dot"></span>the neutral baseplate for composable intelligence</span>
+    <h1 class="rv">We are not building another agent.<br>We build the <span class="glow">baseplate</span>.</h1>
+    <p class="lede rv">
+      A small, restartable core with defined connection rules. Independent components —
+      agents, memory, tools, workflows, surfaces — <b>plug in, combine, and can be removed</b>
+      without the system going down. Models, brains, apps: the ecosystem field. The baseplate: our work.
+    </p>
+    <div class="hero-actions rv">
+      <a class="button primary" href="https://discord.gg/MRESQnf4R4" target="_blank" rel="noopener noreferrer">Build &amp; test with us →</a>
+      <a class="button ghost" href="#core">Read the architecture</a>
+    </div>
+  </div>
+  <div class="scroll-hint"><span>scroll</span><span class="chev">⌄</span></div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>anything can connect <b>✦</b></span>
+    <span>nothing connects silently <b>✦</b></span>
+    <span>everything can be removed <b>✦</span>
+    <span>nothing takes the system down <b>✦</b></span>
+    <span>function is the combination <b>✦</b></span>
+    <span>the baseplate is the product <b>✦</b></span>
+    <span>anything can connect <b>✦</b></span>
+    <span>nothing connects silently <b>✦</b></span>
+    <span>everything can be removed <b>✦</b></span>
+    <span>nothing takes the system down <b>✦</b></span>
+    <span>function is the combination <b>✦</b></span>
+    <span>the baseplate is the product <b>✦</b></span>
+  </div>
+</div>
+
+<!-- ============ THE GAP ============ -->
+<section class="section" id="gap">
+  <div class="wrap">
+    <span class="eyebrow rv">the gap</span>
+    <h2 class="sec-title rv">Everyone is shipping a <em>center</em>.<br>Nobody is shipping the <span class="glow">rules between</span>.</h2>
+    <div class="twocol">
+      <div class="shape x rv">
+        <span class="tag">✕ what everyone ships</span>
+        <h3>The center is a product</h3>
+        <p>An agent, a chat, a brain — with plugins bolted onto it.</p>
+        <ul>
+          <li><span class="mk">✕</span><span>Components hang off <b>someone else's product</b></span></li>
+          <li><span class="mk">✕</span><span>Protocols for <b>one family</b> — tools only, or agents only</span></li>
+          <li><span class="mk">✕</span><span>Your data and your components live <b>inside their center</b></span></li>
+          <li><span class="mk">✕</span><span>The world ends <b>at the product's edge</b></span></li>
+        </ul>
+      </div>
+      <div class="shape ok rv">
+        <span class="tag">✓ what we ship</span>
+        <h3>The center is the rules</h3>
+        <p>An open core that is not an agent, not a vendor, not a product.</p>
+        <ul>
+          <li><span class="mk">✓</span><span>Agents, memory, tools, workflows, surfaces — <b>all plug in equally</b></span></li>
+          <li><span class="mk">✓</span><span>One connection protocol for <b>every kind</b> of component</span></li>
+          <li><span class="mk">✓</span><span>Your data stays in <b>your components</b> — the core holds none</span></li>
+          <li><span class="mk">✓</span><span>Nothing is <b>more at home</b> than anything else</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE CORE ============ -->
+<section class="section" id="core">
+  <div class="wrap">
+    <span class="eyebrow rv">what we build</span>
+    <h2 class="sec-title rv">One core. <em>Nothing else lives in it.</em></h2>
+
+    <div class="diagram-wrap rv">
+      <div class="baseplate">
+        <div class="slots">
+          <div class="slot fill"><span class="ic">◇</span><span class="nm">agents</span></div>
+          <div class="slot fill"><span class="ic">◇</span><span class="nm">memory</span></div>
+          <div class="slot fill"><span class="ic">◇</span><span class="nm">tools</span></div>
+          <div class="slot fill"><span class="ic">◇</span><span class="nm">workflows</span></div>
+          <div class="slot fill"><span class="ic">◇</span><span class="nm">surfaces</span></div>
+          <div class="slot open"><span class="ic">＋</span><span class="nm">your component</span></div>
+        </div>
+        <div class="connect">connect · protocol-versioned · scoped</div>
+        <div class="core">
+          <div class="k">the core</div>
+          <div class="fns">
+            <span class="fn"><b>routes</b> signals</span>
+            <span class="fn"><b>guards</b> permission</span>
+            <span class="fn"><b>tracks</b> who is alive</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="diagram-caption rv">Function is the <b>combination</b>. The core does not think, remember, or act — it lets things that do, do so safely.</p>
+
+    <div class="jobs">
+      <div class="job rv">
+        <span class="n">01</span>
+        <div><h3>It routes</h3><p>Every signal between components crosses the core — calls, events, streams, replies, with deadlines. One language, one path.</p></div>
+      </div>
+      <div class="job rv">
+        <span class="n">02</span>
+        <div><h3>It guards</h3><p>Each connection carries a scope — what this component may read, do, and reach. Grants. Delegation that only shrinks. Expiry. Revocation.</p></div>
+      </div>
+      <div class="job rv">
+        <span class="n">03</span>
+        <div><h3>It tracks life</h3><p>Which components are registered, healthy, degraded — and when something must be treated as gone.</p></div>
+      </div>
+    </div>
+
+    <div class="exclude rv">
+      <span class="xchip no"><b>✕</b>&nbsp; no component code</span>
+      <span class="xchip no"><b>✕</b>&nbsp; no models — local or remote</span>
+      <span class="xchip no"><b>✕</b>&nbsp; no content, no keys</span>
+      <span class="xchip no"><b>✕</b>&nbsp; no outbound network</span>
+      <span class="xchip"><b>✓</b>&nbsp; routing · guarding · life — only</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE RULES ============ -->
+<section class="section" id="rules">
+  <div class="wrap">
+    <span class="eyebrow rv">the rule-set</span>
+    <h2 class="sec-title rv">The value is in the <span class="glow">rules</span>,<br>not in what plugs in.</h2>
+    <div class="rules-grid">
+      <div class="rule rv"><span class="no">rule 01</span><h3>Anything can connect</h3><p>One public, versioned protocol. If a component speaks it, it joins — from any author, now or in ten years.</p></div>
+      <div class="rule rv"><span class="no">rule 02</span><h3>Nothing connects silently</h3><p>Every component declares what it does and what it needs. The core grants a subset — nothing more.</p></div>
+      <div class="rule rv"><span class="no">rule 03</span><h3>Everything can be removed</h3><p>Removal is a legal operation. The core keeps routing; only that component's connection stops.</p></div>
+      <div class="rule rv"><span class="no">rule 04</span><h3>Nothing takes the system down</h3><p>One broken or hostile component fails alone — one containment group per component, bounded resources.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GUARANTEE ============ -->
+<section class="section" id="guarantee">
+  <div class="wrap">
+    <span class="eyebrow rv">the guarantee</span>
+    <h2 class="sec-title rv">The system does not flinch.<br><em>Because nothing else can fall.</em></h2>
+    <div class="gstrip">
+      <div class="gstep rv"><span class="k">moment</span><b>A component breaks</b><span class="s2">crashes, hangs, or turns hostile mid-run</span></div>
+      <div class="garr rv">→</div>
+      <div class="gstep rv"><span class="k">result</span><b>Only it goes down</b><span class="s2">one containment group · the rest keep routing</span></div>
+      <div class="garr rv">→</div>
+      <div class="gstep red rv"><span class="k">worst case</span><b>The core itself is killed</b><span class="s2">crash · power loss · deliberate attack</span></div>
+      <div class="garr rv">→</div>
+      <div class="gstep good rv"><span class="k">restart</span><b>It comes back whole</b><span class="s2">state reloads from durable records · grants reload · components reconnect</span></div>
+    </div>
+    <p class="proof-note rv">The guarantee is structural: the core holds no content and no component logic, so <b>it has nothing that can corrupt the combination</b>. Continuity is preserved by what the core does not contain.</p>
+  </div>
+</section>
+
+<!-- ============ PROOF ============ -->
+<section class="section" id="proof">
+  <div class="wrap">
+    <span class="eyebrow rv">the proof</span>
+    <h2 class="sec-title rv">We don't ask you to believe.<br>We <em>crash it</em> on purpose.</h2>
+    <div class="proof">
+      <div class="pstep dark rv"><span class="n">built</span><div class="world"><b>person A</b><br>private world</div><span class="note">agent · memory · values</span></div>
+      <div class="pstep dark rv"><span class="n">built</span><div class="world"><b>person B</b><br>private world</div><span class="note">agent · memory · values</span></div>
+      <div class="pstep rv"><span class="n">shared</span><div class="world"><b>one shared world</b><br>a task both approve</div><span class="note">joint action needs both · no path between privates</span></div>
+      <div class="pstep rv"><span class="n">attack</span><div class="world" style="color:#e2807e"><b>deliberate kill</b><br>core · agent · memory</div><span class="note">mid-task, mid-request</span></div>
+      <div class="pstep rv"><span class="n">restore</span><div class="world" style="color:var(--jade)"><b>everything reconnects</b><br>state · grants · task resumes</div><span class="note">no widening · no duplicates · worlds intact</span></div>
+    </div>
+    <p class="proof-note rv">If it cannot survive that and hand every private world back exactly as it was — <b>it does not ship.</b> This is the acceptance test of Phase 3.</p>
+  </div>
+</section>
+
+<!-- ============ WHY NOW ============ -->
+<section class="section" id="why-now">
+  <div class="wrap">
+    <span class="eyebrow rv">why this is the moment</span>
+    <h2 class="sec-title rv">Every computing wave ends<br>on a <span class="glow">neutral layer</span>.</h2>
+    <div class="gstrip" style="margin-top:44px">
+      <div class="gstep rv"><span class="k">the PC</span><b>The OS became neutral</b><span class="s2">hardware from everyone</span></div>
+      <div class="gstep rv"><span class="k">the web</span><b>The protocol became neutral</b><span class="s2">browsers from everyone</span></div>
+      <div class="gstep rv"><span class="k">apps</span><b>The store became neutral</b><span class="s2">builders from everyone</span></div>
+      <div class="gstep good rv"><span class="k">intelligence</span><b>The rules become neutral</b><span class="s2">agents · memory · tools from everyone</span></div>
+    </div>
+    <p class="proof-note rv" style="max-width:60ch">Combinations are built by <b>many independent suppliers</b>, not by the platform owner. The neutral layer — not the best product — is where the ecosystem settles. That layer is what we build.</p>
+  </div>
+</section>
+
+<!-- ============ DAO ============ -->
+<section class="section" id="dao">
+  <div class="wrap">
+    <span class="eyebrow rv">the relationship</span>
+    <h2 class="sec-title rv">ResonantOS is a <span class="glow">ResonantDAO</span> project.</h2>
+    <div class="dao-band rv">
+      <div class="row1">
+        <h3>The baseplate is the technology.<br>The DAO is the <span class="glow">community</span> around it.</h3>
+        <span class="dao-tag">→ resonantdao.com</span>
+      </div>
+      <div class="dao-cols">
+        <div class="dao-col"><span class="t">resonantos</span><ul>
+          <li>the neutral baseplate</li>
+          <li>routing, permission, life</li>
+          <li>components plug in and out</li>
+          <li>proven by deliberate failure</li>
+        </ul></div>
+        <div class="dao-col"><span class="t">resonantdao</span><ul>
+          <li>the community of communities</li>
+          <li>membership, contribution, stewardship</li>
+          <li>the economy built on contribution</li>
+          <li>governed by people, not capital</li>
+        </ul></div>
+      </div>
+      <p style="color:var(--muted);font-size:.95rem;max-width:70ch;margin-top:26px;position:relative;z-index:1">
+        The architecture is designed and built in the open — with the community that will steward it.
+        The full DAO design (credentials, economy, governance, roadmap) is in the
+        <a href="https://resonantdao.com/whitepaper/" target="_blank" rel="noopener noreferrer" style="color:var(--amber);text-decoration:underline;text-underline-offset:3px">ResonantDAO whitepaper</a>.
+      </p>
+      <div class="dao-ctas">
+        <a class="button primary" href="https://resonantdao.com/" target="_blank" rel="noopener noreferrer">Visit ResonantDAO ↗</a>
+        <a class="button ghost" href="https://resonantdao.com/whitepaper/" target="_blank" rel="noopener noreferrer">Read the DAO whitepaper</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="cta-final" id="build">
+  <div class="wrap">
+    <span class="eyebrow rv">join the build</span>
+    <h2 class="rv">The baseplate is designed on paper.<br>Now it needs <span class="glow">hands that attack it</span>.</h2>
+    <p class="lede rv">
+      Before one line of code ships, we want the strongest minds on the rules, the core boundary, and the guarantee.
+      <b>Build and test with us</b> — the architecture is discussed in the open, the tech team is forming now.
+    </p>
+    <div class="hero-actions rv">
+      <a class="button primary" href="https://discord.gg/MRESQnf4R4" target="_blank" rel="noopener noreferrer">Join the Discord — start building</a>
+      <a class="button ghost" href="#core">Review the architecture first</a>
+    </div>
+    <p class="mono" style="margin-top:26px;font-size:.78rem;letter-spacing:.14em;color:var(--faint);text-transform:uppercase">discord · resonantdao · augmentatism — the whole stack, one community</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>ResonantOS</h4>
+        <p>The neutral baseplate for composable intelligence. A small, restartable core into which independent components plug, combine, and can be removed without the system going down.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#gap">Why</a></li>
+          <li><a href="#core">Architecture</a></li>
+          <li><a href="#rules">The rules</a></li>
+          <li><a href="#guarantee">The guarantee</a></li>
+          <li><a href="#dao">ResonantDAO</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>The project</h4>
+        <ul>
+          <li><a class="dao-link" href="https://resonantdao.com/" target="_blank" rel="noopener noreferrer">ResonantDAO ↗</a></li>
+          <li><a href="https://resonantdao.com/whitepaper/" target="_blank" rel="noopener noreferrer">DAO whitepaper</a></li>
+          <li><a href="https://augmentatism.com/" target="_blank" rel="noopener noreferrer">Augmentatism ↗</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Join</h4>
+        <ul>
+          <li><a href="https://discord.gg/MRESQnf4R4" target="_blank" rel="noopener noreferrer">Discord — Builders' Guild</a></li>
+          <li><a href="https://www.youtube.com/@manolo.remiddi" target="_blank" rel="noopener noreferrer">YouTube ↗</a></li>
+          <li><a href="mailto:hello@resonantos.com">hello@resonantos.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 ResonantOS — a ResonantDAO project</span>
+      <span style="display:flex;gap:18px"><a href="#">Back to top ↑</a><button id="themeToggle2" class="theme-toggle" aria-label="Toggle color theme"><span class="seg" data-mode="dark" role="img" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span><span class="seg" data-mode="light" role="img" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></span></button></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.documentElement.classList.add('js');
+  // ---- theme ----
+  const root = document.documentElement;
+  const stored = localStorage.getItem('ros-theme');
+  const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+  const apply = (mode) => {
+    root.setAttribute('data-theme', mode);
+    document.querySelectorAll('#themeToggle, #themeToggle2').forEach((btn) => {
+      btn.querySelectorAll('.seg').forEach((s) => s.classList.toggle('on', s.dataset.mode === mode));
+    });
+  };
+  apply(stored || (prefersLight ? 'light' : 'dark'));
+  document.querySelectorAll('#themeToggle, #themeToggle2').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('ros-theme', next);
+      apply(next);
+    });
+  });
+  // ---- scroll reveal ----
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.rv').forEach((el) => io.observe(el));
+  // ---- header shadow on scroll ----
+  window.addEventListener('scroll', () => {
+    document.querySelector('.site-header').style.boxShadow = window.scrollY > 10 ? '0 6px 30px -12px rgba(0,0,0,.4)' : 'none';
+  }, { passive: true });
+</script>
+</body>
+</html>
