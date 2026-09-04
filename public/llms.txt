@@ -1,0 +1,14 @@
+# ResonantOS
+
+> Where a human and a trusted AI meet to think, work, and remember together. A browser-first operating layer: one trusted interface (Augmentor), specialist add-ons, compounding memory (the Living Archive), and community stewardship.
+
+Pages:
+- [Home](https://resonantos.com/): What ResonantOS is.
+- [About](https://resonantos.com/about): The project and its people.
+- [DAO & Contribution Economy](https://resonantos.com/dao): The human-first economy — governance power linked to verified membership and contribution, capital never toward voting weight.
+- [Whitepaper](https://resonantos.com/whitepaper): The full whitepaper.
+- [Symbiotic Licence](https://resonantos.com/symbiotic-license): The on-chain membership credential (intentionally not final legal text yet).
+- [Light edition](https://resonantos.com/light): The light-theme edition of the site.
+
+Code:
+- [GitHub org](https://github.com/ResonantOS): The 2.0.0-alpha browser-first release (MIT) and the economy research tower.
